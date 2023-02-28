@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Lifeform
+comment1.params=cell
+comment1.target=void\ act(Cell)
+comment2.params=
+comment2.target=java.lang.String\ getInfectionType()
+comment3.params=
+comment3.target=java.awt.Color\ getInfectionColor()
+numComments=4

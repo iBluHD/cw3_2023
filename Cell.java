@@ -12,7 +12,7 @@ import javax.management.loading.PrivateClassLoader;
 
 public class Cell {
     // Whether the cell is alive or not.
-    private boolean alive;
+    public boolean alive; //TODO: make private again!
 
     // Whether the cell will be alive in the next generation.
     private boolean nextAlive;
@@ -46,12 +46,6 @@ public class Cell {
      * @return true if the cell is still alive.
      */
     protected boolean isAlive() {
-        if(infection == null){
-          alive = false;
-        }
-        else{
-          alive = true;
-        }
         return alive;
     }
 
@@ -60,15 +54,12 @@ public class Cell {
      */
     protected void setDead() {
         alive = false;
-        infection = null;
     }
-
     /**
      * Indicate that the cell will be alive or dead in the next generation.
      */
     public void setNextState(boolean value) {
       nextAlive = value;
-      //if(value == true && alive = false){infection.isDead=false;}
     }
     public String getInfectionType() {
       return infection.getInfectionType();
@@ -76,17 +67,14 @@ public class Cell {
     public Lifeform getInfection(){
       return infection;
     }
-    public void setInfection(Lifeform l){
-      infection = l;
+    public void setInfection(Lifeform i){
+      infection = i;
     }
     /**
      * Changes the state of the cell
      */
     public void updateState() {
       alive = nextAlive;
-      if(infection != null && alive == false){
-        setDead();
-      }
     }
 
 

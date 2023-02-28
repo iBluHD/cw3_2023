@@ -3,6 +3,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.math.*;
 
 /**
  * Represent a rectangular grid of field positions.
@@ -144,10 +145,11 @@ public class Field {
     /**
      * Get a shuffled list of living neighbours, of the same type of Lifeform.
      * @param location Get locations adjacent to this.
-     * @param isAlive True = return only alive neighbours.
+     * @param alive True = return only alive neighbours, False = return only dead neighbours.
+     * @param type String to retrieve cells containing only a certain lifeform. Can be set to null to allow for any type.
      * @return A list of living neighbours
      */
-    public List<Cell> getNeighbours(Location location, boolean checkAlive) {
+    public List<Cell> getNeighbours(Location location, boolean alive, String type) {
 
         assert location != null : "Null location passed to adjacentLocations";
         List<Cell> neighbours = new LinkedList<>();
@@ -156,7 +158,18 @@ public class Field {
 
             for (Location loc : adjLocations) {
                 Cell cell = field[loc.getRow()][loc.getCol()];
-                if(checkAlive){
+                if(type != null){
+                    try{
+                        if(cell.getInfection().getInfectionType() != type){
+                            continue;
+                        }
+                    }
+                    catch(Exception e){
+                        //System.out.println(e);
+                    }
+                }
+
+                if(alive){
                     if(cell.isAlive()){neighbours.add(cell);}
                 }
                 else{
@@ -168,9 +181,6 @@ public class Field {
         return neighbours;
     }
     
-
-
-
 
     /**
      * Return the depth of the field.
@@ -187,4 +197,20 @@ public class Field {
     public int getWidth() {
         return width;
     }
+    /**
+     * Calculates the radial fractional distance between a location and
+     * the centre of the field. Ex: being in one of the corners returns 1, the centre returns 0.
+     * @param location
+     * @return fractional radius.
+     */
+    public double getRadialFraction(Location location){
+        int wCentre = width / 2;
+        int hCentre = depth / 2;
+        int deltaX = location.getRow() - wCentre;
+        int deltaY = location.getCol() - hCentre;
+        double distance = Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
+        double max_distance = Math.sqrt((wCentre * wCentre) + ( hCentre * hCentre));
+        return distance / max_distance;
+    }
+
 }

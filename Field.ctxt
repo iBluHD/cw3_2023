@@ -4,9 +4,9 @@ comment0.text=\n\ Represent\ a\ rectangular\ grid\ of\ field\ positions.\n\ Each
 comment1.params=depth\ width
 comment1.target=Field(int,\ int)
 comment1.text=\n\ Represent\ a\ field\ of\ the\ given\ dimensions.\n\ @param\ depth\ The\ depth\ of\ the\ field.\n\ @param\ width\ The\ width\ of\ the\ field.\n
-comment10.params=location
-comment10.target=java.util.List\ getLivingNeighbours(Location)
-comment10.text=\n\ Get\ a\ shuffled\ list\ of\ living\ neighbours\n\ @param\ location\ Get\ locations\ adjacent\ to\ this.\n\ @return\ A\ list\ of\ living\ neighbours\n
+comment10.params=location\ alive
+comment10.target=java.util.List\ getNeighbours(Location,\ boolean)
+comment10.text=\n\ Get\ a\ shuffled\ list\ of\ living\ neighbours,\ of\ the\ same\ type\ of\ Lifeform.\n\ @param\ location\ Get\ locations\ adjacent\ to\ this.\n\ @param\ alive\ True\ \=\ return\ only\ alive\ neighbours,\ False\ \=\ return\ only\ dead\ neighbours.\n\ @return\ A\ list\ of\ living\ neighbours\n
 comment11.params=
 comment11.target=int\ getDepth()
 comment11.text=\n\ Return\ the\ depth\ of\ the\ field.\n\ @return\ The\ depth\ of\ the\ field.\n

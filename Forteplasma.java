@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
  * Simplest form of life.
- * Fun Fact: Mycoplasma are one of the simplest forms of life.  A type of
+ * Fun Fact: Mycoplasma are one of the simplest forms of life. A type of
  * bacteria, they only have 500-1000 genes! For comparison, fruit flies have
  * about 14,000 genes.
  *
@@ -14,33 +14,36 @@ import java.util.Random;
 
 public class Forteplasma extends Lifeform {
 
-  public static double probability = 0.0;
-    /*
-     * Create a new Mycoplasma.
-     *
-     * @param field The field currently occupied.
-     * @param location The location within the field.
-    */
-    Random rand = Randomizer.getRandom();
+  /*
+   * Create a new Mycoplasma.
+   *
+   * @param field The field currently occupied.
+   * 
+   * @param location The location within the field.
+   */
+  private static double RESPAWN_PROBABILITY = 0.01;
+  Random rand = Randomizer.getRandom();
 
-    public Forteplasma() {
-        super();
-        super.type = "forteplasma"; //this might be a redundant variable.
-        super.color = Color.GREEN;
-        
-    }
-    /**
-     * This is how the Mycoplasma decides if it's alive or not
-     */
-     public void act(Cell cell) {
-      List<Cell> neighbours = cell.getField().getNeighbours(cell.getLocation(),true);  
-      if(neighbours.size() >= (1+rand.nextInt(7))){
-        cell.setNextState(true);
-      }
-      else{
-        cell.setNextState(false);
-        cell.setDead();
+  public Forteplasma() {
+    super();
+    super.type = "forteplasma"; // this might be a redundant variable.
+    super.color = Color.GREEN;
+    super.probability = 0.3;
+
+  }
+
+  /**
+   * This is how the Mycoplasma decides if it's alive or not
+   */
+  public void act(Cell cell) {
+    List<Cell> neighbours = cell.getField().getNeighbours(cell.getLocation(), true, type);
+    if (neighbours.size() <= (1 + rand.nextInt(8)) && cell.isAlive()) {
+      cell.setNextState(true);
+    } else if (!cell.isAlive() && rand.nextDouble() < RESPAWN_PROBABILITY) {
+      cell.setNextState(true);
+    } else {
+      cell.setNextState(false);
     }
 
-     }
+  }
 }

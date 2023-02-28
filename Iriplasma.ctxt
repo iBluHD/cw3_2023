@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Iriplasma
+comment1.params=
+comment1.target=Iriplasma()
+comment2.params=cell
+comment2.target=void\ act(Cell)
+comment3.params=
+comment3.target=java.awt.Color\ getInfectionColor()
+numComments=4
